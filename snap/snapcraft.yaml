@@ -1,0 +1,19 @@
+name: circleci
+version: "0.1.1"
+summary: "The CircleCI Local Build Tool"
+description: |
+  The CircleCI Local Build Tool allows you to run builds on your local machine as if they were running within CircleCI. This allows quick interation over small changes and easier debugging of issues. The Local Build Tool can also validate your CircleCI configuration file.
+grade: stable
+confinement: strict
+
+parts:
+  circleci:
+    plugin: nil
+    prepare: wget https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
+    install: cp circleci $SNAPCRAFT_PART_INSTALL; chmod +x $SNAPCRAFT_PART_INSTALL/circleci
+    stage-packages: [docker.io]
+
+apps:
+  circleci:
+    command: circleci
+    plugs: [docker]

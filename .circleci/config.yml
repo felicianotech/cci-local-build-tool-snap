@@ -1,0 +1,20 @@
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cibuilds/snapcraft:beta
+    steps:
+      - checkout
+      - run:
+          name: "Build Snap"
+          command: snapcraft
+      - run:
+          name: "Test Website"
+          command: echo "Hi"
